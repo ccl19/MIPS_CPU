@@ -1,0 +1,27 @@
+LB $5 2($0)
+ADDIU $6 $0 4
+LHU $7 2($6)
+BEQ $5 $7 3
+SUBU $2 $6 $0
+BLTZ $5 3
+MULT $6 $7
+JR 0($0)
+XOR $2 $2 $6
+MFLO  $8 LO
+SB $8 4($6)
+SLL $9 $6 1
+LH $10 0($9)
+SLL $9 $9 5
+DIV $10 $9
+MFLO $11 
+LW $12 8($2)
+JALR $12 $31
+ANDI $14 $11 0x0047
+J 0
+SRA $2 $2 2
+SLTU $13 $31 $11
+BNE $14 $2 3
+SRAV $3 $2 $13
+JR $0
+OR $2 $3 $13
+SRL $2 $14 2
